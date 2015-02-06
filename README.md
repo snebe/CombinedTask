@@ -16,4 +16,4 @@ Extracts and summarises logfile data for each stage of the combined task.
 -Deval vs. Non Deval Responding in Extinction
 -Deval vs. Non Deval Responding during Reacquisition
 
-**MORE TO COME!***
+**MORE TO COME!**
