@@ -1,3 +1,8 @@
+#create participant vectors
+#These vectors include the location of the log file, the version of the task used, the ID and the number of that participant
+NW001 <- c("R/data/NW001.log", "DA", "NW001", 1)
+
+
 #text that signals the start of each contingency variation trial
 contingency.start.text <- list("New trial (rep=0, index=0): {u'upperB': 20, u'lowerB': 1, u'lowerA': 1, u'upperA': 6, u'Order': 1}", 
                            "New trial (rep=0, index=1): {u'upperB': 6, u'lowerB': 1, u'lowerA': 1, u'upperA': 20, u'Order': 2}", 
@@ -22,7 +27,7 @@ ext.end <- c("extinction_text_2: autoDraw = True")
 
 #text signalling the start and end of reacquisition 
 reacq.start <- c("extinction_start_2: autoDraw = False")
-reacq.end <- c("instrufeedback_A_2: image = \'M&M.png\'")
+reacq.end <- c("instru_finaltext_2: autoDraw = True")
 
 
 #find times of text strings
@@ -48,9 +53,25 @@ findValue <- function(x){
 #corrects left and right to high and low
 
 findContingency <- function(x, y){
-  matrix(as.numeric(x[1,1], x[2,2], x[2,3], x[1,4], x[2,5], x[1,6],
-           x[2,1], x[1,2], x[1,3], x[2,4], x[1,5], x[2,6]),
+  a <- matrix(c(x[1,1], x[2,1], x[2,2], x[1,2], x[2,3], x[1,3], x[1,4],  x[2,4], x[2,5], x[1,5], x[1,6], x[2,6]),
     nrow = 2,
     ncol = 6,
     dimnames = list(c(paste0("highc.", y), paste0("lowc.", y))))
+  data.matrix(a)
 }
+
+
+### BINNED DATA FUNCTIONS ####
+#These functions allow for looking at responding across the duration of a trial
+
+#This creates bins from time 'a' to time 'b', of length y
+#this looks for the start and end times as the first and third values in 'x'
+#this can be changed to [1] and [2]
+createBins <- function(x,y){
+  a <- as.numeric(x[1])
+  
+  b <- as.numeric(x[3])
+  seq(from = a, to = b, by = y)
+}
+
+

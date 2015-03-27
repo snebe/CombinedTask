@@ -1,16 +1,31 @@
 ##load functions
 source("R/functions.R")
 
+##create list of participant vectors that are defined in the functions file
+ID <- list(NW001) # add extra participant vectors here
+
+#Create empty vectors for your data
+#These will be filled in with each participant's data for that value
+
+participant <- character(length = length(ID))
+high.resp.mean <- numeric(length = length(ID))
+low.resp.mean <- numeric(length = length(ID))
+high.os.mean <- numeric(length = length(ID))
+low.os.mean <- numeric(length = length(ID))
+high.rating.mean <- numeric(length = length(ID))
+low.rating.mean <- numeric(length = length(ID))
+ext.deval.resp <- numeric(length = length(ID))
+ext.nondeval.resp <- numeric(length = length(ID))
+re.deval.resp <- numeric(length = length(ID))
+re.nondeval.resp <- numeric(length = length(ID))
+
+#Run the data analysis for each participant
 ## import data from log files.
-data <- read.delim("R/data/test.log", header = FALSE)
+data <- read.delim(NW001[1], header = FALSE)
+version <- NW001[2]
 
 #give data column headings
 colnames(data) <- c("time", "type", "text")
-
-##ID
-participant <- c("test")
-## version
-version <- c("AA")
 
 #get the value in the time column for each row where a left of right keypress is made
 leftRtimes <- data$time[data$text == "Keypress: c"]
@@ -99,6 +114,27 @@ reacq.times <- c(findTime(reacq.start), findTime(reacq.end))
 deval.reacq.rs <- countResp(reacq.times, y=devalRtimes)
 nondeval.reacq.rs <- countResp(reacq.times, y=nondevalRtimes)
 
+# #insert individual participant values into premade vectors
+# participant[as.numeric(i[4])] <- i[[3]]
+# high.resp.mean <- 
+# low.resp.mean <- 
+# high.os.mean <- 
+# low.os.mean <-
+# high.rating.mean <- 
+# low.rating.mean <- 
+# ext.deval.resp <- deval.ext.rs
+# ext.nondeval.resp <- nondeval.ext.rs
+# re.deval.resp <- deval.reacq.rs
+# re.nondeval.resp <- deval.reacq.rs
+# }
+
+
 
 ###CREATE DATA FRAME OF OUTPUT####
 df <- data.frame(participant, deval.ext.rs, nondeval.ext.rs, deval.reacq.rs, nondeval.reacq.rs)
+
+## EXPORT DATA FRAME TO EXCEL
+#export group data
+dir.output <- 'R/output' # sets output folder
+write.csv(df, file = file.path(dir.output, "group_deval.csv"), row.names = FALSE)
+
