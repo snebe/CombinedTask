@@ -1,7 +1,8 @@
 #create participant vectors
 #These vectors include the location of the log file, the version of the task used, the ID and the number of that participant
 NW001 <- c("R/data/NW001.log", "DA", "NW001", 1)
-NW002 <- c("R/data/NW002.log", "DA", "NW002", 2)
+NW002 <- c("R/data/NW002.log", "FA", "NW002", 2)
+
 
 
 #text that signals the start of each contingency variation trial
@@ -30,6 +31,10 @@ ext.end <- c("extinction_text_2: autoDraw = True")
 #text signalling the start and end of reacquisition 
 reacq.start <- c("extinction_start_2: autoDraw = False")
 reacq.end <- c("instru_finaltext_2: autoDraw = True")
+
+#Instru Snack text
+snackA.text <-c("snackA_3: autoDraw = True")
+snackB.text <- c("snackB_3: autoDraw = True")
 
 
 #find times of text strings

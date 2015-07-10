@@ -27,6 +27,8 @@ high.rating.mean <- numeric(length = length(ID))
 low.rating.mean <- numeric(length = length(ID))
 instru.deval.resp <- numeric(length = length(ID))
 instru.nondeval.resp <- numeric(length = length(ID))
+instru.deval.os <- numeric(length = length(ID))
+instru.nondeval.os <- numeric(length = length(ID))
 ext.deval.resp <- numeric(length = length(ID))
 ext.nondeval.resp <- numeric(length = length(ID))
 re.deval.resp <- numeric(length = length(ID))
@@ -102,12 +104,20 @@ for(i in ID){
   # if version is XA, LEFT outcome is devalued
   # if version is XB, RIGHT outcome is devalued
   
+  leftOtimes <- findTime(snackA.text)
+  rightOtimes <- findTime(snackB.text)
+  
+  
   if((substr(version, 2, 2)) == "A"){
     devalRtimes <- leftRtimes
     nondevalRtimes <- rightRtimes
+    devalOtimes <- leftOtimes
+    nondevalOtimes <- rightOtimes
   } else if ((substr(version, 2,2)) == "B"){
     devalRtimes <- rightRtimes
     nondevalRtimes <- leftRtimes
+    devalOtimes <- rightOtimes
+    nondevalOtimes <- leftOtimes
   } else {
     "Invalid Version Entered"
   }
@@ -117,6 +127,9 @@ for(i in ID){
   
   deval.instru.rs <- countResp(instru.times, y=devalRtimes) # counts number of responses on the action that will be associated with the devalued outcome
   nondeval.instru.rs <- countResp(instru.times, y=nondevalRtimes)
+  
+  deval.instru.os <- countResp(instru.times, y=devalOtimes)
+  nondeval.instru.os <- countResp(instru.times, y=nondevalOtimes)
   
   ### EXTINCTION DATA EXTRACTION ###
   ext.times <- c(findTime(ext.start), findTime(ext.end))
@@ -143,6 +156,8 @@ for(i in ID){
   low.rating.mean[as.numeric(i[4])] <- mean.cv.ratings[2]
   instru.deval.resp[as.numeric(i[4])] <- deval.instru.rs
   instru.nondeval.resp[as.numeric(i[4])] <- nondeval.instru.rs
+  instru.deval.os[as.numeric(i[4])] <- deval.instru.os
+  instru.nondeval.os[as.numeric(i[4])] <- nondeval.instru.os
   ext.deval.resp[as.numeric(i[4])] <- deval.ext.rs
   ext.nondeval.resp[as.numeric(i[4])] <- nondeval.ext.rs
   re.deval.resp[as.numeric(i[4])] <- deval.reacq.rs
@@ -151,7 +166,7 @@ for(i in ID){
 
 
 ###CREATE DATA FRAME OF OUTPUT####
-df_deval <- data.frame(participant, deval.instru.rs, nondeval.instru.rs, deval.ext.rs, nondeval.ext.rs, deval.reacq.rs, nondeval.reacq.rs)
+df_deval <- data.frame(participant, deval.instru.rs, nondeval.instru.rs, instru.deval.os, instru.nondeval.os, deval.ext.rs, nondeval.ext.rs, deval.reacq.rs, nondeval.reacq.rs)
 
 df_cv <- data.frame(participant, high.resp.mean, low.resp.mean, high.os.mean, low.os.mean, high.rating.mean, low.rating.mean)
 
