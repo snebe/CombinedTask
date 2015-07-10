@@ -2,6 +2,7 @@
 #These vectors include the location of the log file, the version of the task used, the ID and the number of that participant
 NW001 <- c("R/data/NW001.log", "DA", "NW001", 1)
 NW002 <- c("R/data/NW002.log", "FA", "NW002", 2)
+NW003 <- c("R/data/NW003.log", "BA", "NW003", 3)
 
 
 
@@ -25,7 +26,7 @@ instru.start <- c("instru_instructions: autoDraw = False")
 instru.end <- c("instru_finaltext: autoDraw = True")
 
 #text signalling the start and end of extinction trial
-ext.start <- c("extinction_start: autoDraw = False")
+ext.start <- c("extinction_start: autoDraw = False") ##change you to 
 ext.end <- c("extinction_text_2: autoDraw = True")
 
 #text signalling the start and end of reacquisition 

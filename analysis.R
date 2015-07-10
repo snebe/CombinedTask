@@ -13,7 +13,7 @@ source("R/functions.R")  #this loads the functions that will be needed for analy
 
 #Create a list of all of the participant ID vectors that are created in the 'functions.R' script
 
-ID <- list(NW001, NW002) # add extra participant vectors here
+ID <- list(NW001, NW002, NW003) # add extra participant vectors here
 
 #Create empty vectors for your data
 #These will be filled in with each participant's data for that value
@@ -113,7 +113,7 @@ for(i in ID){
     nondevalRtimes <- rightRtimes
     devalOtimes <- leftOtimes
     nondevalOtimes <- rightOtimes
-  } else if ((substr(version, 2,2)) == "B"){
+  } else if ((substr(version, 2, 2)) == "B"){
     devalRtimes <- rightRtimes
     nondevalRtimes <- leftRtimes
     devalOtimes <- rightOtimes
@@ -161,12 +161,12 @@ for(i in ID){
   ext.deval.resp[as.numeric(i[4])] <- deval.ext.rs
   ext.nondeval.resp[as.numeric(i[4])] <- nondeval.ext.rs
   re.deval.resp[as.numeric(i[4])] <- deval.reacq.rs
-  re.nondeval.resp[as.numeric(i[4])] <- deval.reacq.rs
+  re.nondeval.resp[as.numeric(i[4])] <- nondeval.reacq.rs
 }
 
 
 ###CREATE DATA FRAME OF OUTPUT####
-df_deval <- data.frame(participant, deval.instru.rs, nondeval.instru.rs, instru.deval.os, instru.nondeval.os, deval.ext.rs, nondeval.ext.rs, deval.reacq.rs, nondeval.reacq.rs)
+df_deval <- data.frame(participant,instru.deval.resp, instru.nondeval.resp, instru.deval.os, instru.nondeval.os, ext.deval.resp, ext.nondeval.resp, re.deval.resp, re.nondeval.resp)
 
 df_cv <- data.frame(participant, high.resp.mean, low.resp.mean, high.os.mean, low.os.mean, high.rating.mean, low.rating.mean)
 
