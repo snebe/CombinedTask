@@ -1,5 +1,5 @@
-# task_analysis
-Combined Task: Data Analysis & Extraction
+# combined_task_analysis
+Combined Reward-Learning Task: Data Analysis & Extraction
 ========================================
 Extracts and summarises logfile data for each stage of the combined task.
 
